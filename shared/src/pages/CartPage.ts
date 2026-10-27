@@ -13,13 +13,8 @@ export class CartPage extends BasePage {
             .getByTestId('tableCart')
             .locator('[data-testid^="productItem_"]');
     }
-
     private row(productName: string): Locator {
         return this.rows.filter({ hasText: productName }).first();
-    }
-
-    async itemCount(): Promise<number> {
-        return this.rows.count();
     }
 
     productName(productName: string): Locator {
@@ -28,5 +23,9 @@ export class CartPage extends BasePage {
 
     unitPrice(productName: string): Locator {
         return this.row(productName).getByTestId('cartItemPrice');
+    }
+
+    async itemCount(): Promise<number> {
+        return this.rows.count();
     }
 }

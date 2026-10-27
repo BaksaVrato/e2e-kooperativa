@@ -31,27 +31,16 @@ export class HomePage extends BasePage {
         await this.searchButton.click();
         await this.searchWidget.fillInput(searchTerm);
         await this.searchWidget.submitSearch();
-        await this.page.waitForURL(/\/vyhladavanie\//);
-    }
-
-    private productCard(productName: string): Locator {
-        return this.page
-            .getByTestId('productItem')
-            .filter({ hasText: productName })
-            .first();
     }
 
     async addProductToCart(productName: string): Promise<void> {
-        await this.productCard(productName)
+        await this.page
+            .getByTestId('productItem')
+            .filter({ hasText: productName })
+            .first()
             .getByTestId('buttonAddToCart')
             .click();
         await expect(this.headerCart).toContainText(/\d/);
-    }
-
-    async searchForInvalidTerm(searchTerm: string): Promise<void> {
-        await this.searchButton.click();
-        await this.searchWidget.fillInput(searchTerm);
-        await this.searchWidget.submitSearch();
     }
 
     searchError(): Locator {
