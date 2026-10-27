@@ -1,10 +1,11 @@
-import { BasePage, CookiesPopup, SearchWidget } from '@shared';
+import { BasePage, CookiesPopup, Notifier, SearchWidget } from '@shared';
 import { expect, Locator, Page } from '@playwright/test';
 
 export class HomePage extends BasePage {
     protected readonly path: string = '/';
 
     private readonly cookiesPopup: CookiesPopup;
+    private readonly notifier: Notifier;
 
     private readonly searchWidget: SearchWidget;
     private readonly searchButton: Locator;
@@ -14,6 +15,7 @@ export class HomePage extends BasePage {
         super(page);
 
         this.cookiesPopup = new CookiesPopup(page);
+        this.notifier = new Notifier(page);
         this.searchWidget = new SearchWidget(page);
 
         this.searchButton = page.getByTestId('linkSearchIcon').first();
@@ -44,5 +46,15 @@ export class HomePage extends BasePage {
             .getByTestId('buttonAddToCart')
             .click();
         await expect(this.headerCart).toContainText(/\d/);
+    }
+
+    async searchForInvalidTerm(searchTerm: string): Promise<void> {
+        await this.searchButton.click();
+        await this.searchWidget.fillInput(searchTerm);
+        await this.searchWidget.submitSearch();
+    }
+
+    searchError(): Locator {
+        return this.notifier.message;
     }
 }

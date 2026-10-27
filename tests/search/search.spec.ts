@@ -32,7 +32,15 @@ test.describe('Search feature', () => {
         );
     });
 
-    test('Display validation error when searching with fewer thatn 3 characters', async ({
-        page,
-    }) => {});
+    test('Display validation error when searching with fewer than 3 characters', async ({
+        homePage,
+    }) => {
+        await homePage.open();
+        await homePage.searchForInvalidTerm('ab');
+
+        await expect(homePage.searchError()).toBeVisible();
+        await expect(homePage.searchError()).toHaveText(
+            'Prosím, použite minimálne 3 znaky!',
+        );
+    });
 });
