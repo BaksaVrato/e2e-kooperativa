@@ -36,7 +36,7 @@ test.describe('Search feature', () => {
         homePage,
     }) => {
         await homePage.open();
-        await homePage.searchForInvalidTerm('ab');
+        await homePage.searchForProduct('ab');
 
         await expect(homePage.searchError()).toBeVisible();
         await expect(homePage.searchError()).toHaveText(

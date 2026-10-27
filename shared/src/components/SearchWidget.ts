@@ -1,12 +1,10 @@
 import { Locator, Page } from '@playwright/test';
 
 export class SearchWidget {
-    private readonly page: Page;
     private readonly searchInput: Locator;
     private readonly searchButton: Locator;
 
     constructor(page: Page) {
-        this.page = page;
         this.searchInput = page.getByTestId('searchInput');
         this.searchButton = page.getByTestId('searchBtn');
     }
