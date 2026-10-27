@@ -1,0 +1,5 @@
+dist
+node_modules
+out-tsc
+test-results
+playwright-report
