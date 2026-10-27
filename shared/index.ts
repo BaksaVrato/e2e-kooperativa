@@ -7,3 +7,4 @@ export { test, expect } from './src/fixtures/fixtures';
 export { CookiesPopup } from './src/components/CookiesPopup';
 export { Notifier } from './src/components/Notifier';
 export { SearchWidget } from './src/components/SearchWidget';
+export { ERROR_MESSAGE } from './src/consts';

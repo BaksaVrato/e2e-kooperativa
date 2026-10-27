@@ -1,4 +1,4 @@
-import { test, expect } from '@shared';
+import { test, expect, ERROR_MESSAGE } from '@shared';
 import { loadData, Product } from '@shared';
 
 interface SearchProduct extends Product {
@@ -39,8 +39,6 @@ test.describe('Search feature', () => {
         await homePage.searchForProduct('ab');
 
         await expect(homePage.searchError()).toBeVisible();
-        await expect(homePage.searchError()).toHaveText(
-            'Prosím, použite minimálne 3 znaky!',
-        );
+        await expect(homePage.searchError()).toHaveText(ERROR_MESSAGE);
     });
 });
